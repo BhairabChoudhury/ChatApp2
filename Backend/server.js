@@ -119,7 +119,7 @@ app.use(express.json()); // to accept json data
 
 app.use(
   cors({
-    origin: "http://localhost:5175",
+    origin: "http://localhost:5176",
     credentials: true,
   })
 );

@@ -20,7 +20,7 @@ const allUsers = asyncHandler(async (req , res) =>{
         
        } :{} ; // if not present then {} 
 
-       const users = await User.find(keyword).find({_id :{$ne:req.user._id}}) ;
+       const users = await User.find(keyword).find({_id :{$ne:req.user._id}}) ;/// it  users store users array of object users where keyword matching with any Users 
         res.send(users);
 })
 

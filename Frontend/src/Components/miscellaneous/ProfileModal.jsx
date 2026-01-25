@@ -1,5 +1,5 @@
 // For  your Profile side  means your Photo and  
-// when you click tjen => { my Profile , Logout } options are exist 
+// when you click then => One page arrive with youe photo and  Nam and Email Id 
 import { ViewIcon } from "@chakra-ui/icons";
 import {
   Modal,

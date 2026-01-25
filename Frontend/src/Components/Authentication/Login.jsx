@@ -23,7 +23,7 @@ function Login (){
             // const [serverResponse , setServerResponse] = useState(null) ; 
               const navigate  = useNavigate() ;
                const toast =useToast() ;
-              const submitHandler = async () => {
+       const submitHandler = async () => {
     setLoading(true);
     if ( !name||!email || !password) {
       toast({

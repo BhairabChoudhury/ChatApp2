@@ -5,7 +5,7 @@ import {
   Box ,
   Stack ,
   Text,
-   Button
+  Button
 }  from "@chakra-ui/react"
 
 import { useEffect , useState } from "react"; 
@@ -13,12 +13,15 @@ import { AddIcon } from "@chakra-ui/icons";
 import { ChatState } from "../../Context/ChatProvider";
 import axios from "axios";
 import { getSender } from "../../config/ChatLogics";
-const MyChats = ()=>{
-     const [loggedUser , setLoggedUser] = useState() ;
+import GroupChatModal from "../miscellaneous/GroupChatModal";
+
+const MyChats = ({fetchAgain})=>{
+    const [loggedUser , setLoggedUser] = useState() ;
      
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
    const toast = useToast() ; 
   const fetchChats = async () => {
+
   try {
     const config = {
       headers: {
@@ -26,9 +29,9 @@ const MyChats = ()=>{
       },
     };
 
-    const { data } = await axios.get("/api/chat", config);
-    setChats(data);// here data is user 
-  } catch (error) {
+    const { data } = await axios.get("http://localhost:8000/api/chat", config);
+      setChats(Array.isArray(data) ? data : []);
+   } catch (error) {
     toast({
       title: "Error Occured!",
       description: "Failed to Load the chats",
@@ -39,14 +42,15 @@ const MyChats = ()=>{
     });
   }
 };
-  useEffect(() => {
-    setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
-    fetchChats();
-    // eslint-disable-next-line
-  }, []);
+ useEffect(() => {
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  console.log("from localStorage:", userInfo); // ✅ correct
+  setLoggedUser(userInfo);
+  fetchChats();
+}, [fetchAgain]);
+
+
    return (
- 
-    
 <Box 
 display={{ base: selectedChat ? "none" : "flex", md: "flex" }}
 flexDirection="column"
@@ -55,8 +59,8 @@ p={2}
 bg="white"
 w={{ base: "100%", md: "31%" }}
 borderRadius="lg"
-borderWidth="1px"
-
+borderWidth="2px"
+borderColor="#38B2AC"
 >
   <Box
     display="flex"
@@ -74,13 +78,15 @@ borderWidth="1px"
       My Chats
     </Text>
 
-    <Button
+  <GroupChatModal>
+      <Button
       display="flex"
       fontSize={{ base: "17px", md: "10px", lg: "17px" }}
       rightIcon={<AddIcon />}
     >
       New Group Chat
     </Button>
+  </GroupChatModal>
   </Box>
   <Box
     display="flex"
@@ -92,10 +98,10 @@ h="100vh"
 borderRadius="lg"
 overflowY="hidden"
    >
-      {chats.length > 0  && (
-        <Stack overflow="auto" flex="1" >
-            {chats.map((chat)=>{
-                     <Box
+   {Array.isArray(chats) && chats.length > 0 && (
+  <Stack overflow="auto" flex="1">
+    {chats.map((chat) => (
+      <Box
         key={chat._id}
         onClick={() => setSelectedChat(chat)}
         cursor="pointer"
@@ -106,18 +112,33 @@ overflowY="hidden"
         borderRadius="lg"
       >
         <Text>
-          {!chat.isGroupChat
-            ? getSender(loggedUser, chat.users)
+          {!chat.isGroupChat 
+            ?  getSender(loggedUser , chat.users)
             : chat.chatName}
         </Text>
-         </Box>
-            })}
-             
-        </Stack>
-      )  }
+      </Box>
+    ))}
+  </Stack>
+)}
+
   </Box>
 </Box>
    )
 }
 
 export default MyChats; 
+/*
+What you wrote (NO return )
+chats.map((chat) => {
+  <Box>
+    ...
+  </Box>
+});
+
+When you use { } after the arrow =>, JavaScript expects an explicit return.
+Since you didn’t write one, the function returns undefined.
+
+ so use it=>  chats.map((chat)=>(
+   
+  ))
+*/

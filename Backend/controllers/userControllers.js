@@ -96,10 +96,14 @@ const  authUser = asyncHandler (async (req ,res ) =>{
     if(!isPasswordCorrect) { 
        return res.status(403).json({message :"Invalid Credentials"}) ;
     }
-
-    const token = generateToken(existingUser._id) ;
-    
-    res.json({token}) ; 
+   res.json({
+      _id: existingUser._id,
+      name: existingUser.name,
+      email: existingUser.email,
+      isAdmin: existingUser.isAdmin,
+      pic: existingUser.pic,
+      token: generateToken(existingUser._id),
+    });
 })
 
 module.exports = { allUsers, registerUser, authUser , };

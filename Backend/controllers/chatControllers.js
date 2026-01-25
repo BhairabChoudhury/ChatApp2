@@ -130,7 +130,7 @@ const createGroupChat = asyncHandler(async (req, res) => {
 
 const  renameGroup = asyncHandler(async (req ,res) =>{
       const {chatId ,chatName} = req.body ; // chat name here new name 
-      const updatedChat  = await  Chat.findByAndUpdate (
+      const updatedChat  = await  Chat.findByIdAndUpdate (
          chatId , 
          {
             chatName:chatName 
@@ -157,7 +157,7 @@ const  renameGroup = asyncHandler(async (req ,res) =>{
     
     const {chatId , userId} = req.body ; 
 
-    const added = await Chat.findByAndUpdate(
+    const added = await Chat.findByIdAndUpdate(
         chatId , 
         {
             $push:{users:userId} , 

@@ -104,6 +104,7 @@ const accessChat = async (userId) => {
         isClosable: true,
         position: "top-left",
          }) ;
+         setSearchResult([]) ; 
          return ; 
       }
       try {
@@ -150,7 +151,7 @@ const accessChat = async (userId) => {
             </Text>
           </Button>
         </Tooltip>
-
+  
        <Text fontSize="2xl" fontFamily="Work Sans" textAlign="center">
            Chat Dil Khulke karo !
         </Text>

@@ -87,9 +87,10 @@ const GroupChatModal = ({children})=>{
 
        const handleSearch = async (query) =>{
           setSearch(query) ; 
-          if(!query) {
-             return ; 
-          }
+         if (!query.trim()) { // work when query is empty 
+    setSearchResult([]); //  clear results
+    return;
+       }
 
           try {
              setLoading(true) ;

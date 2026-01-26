@@ -162,9 +162,9 @@ return (
     margin="auto"
   />
 ) : (
-  <Box className="messages">
-    
-  </Box>
+ < div className="messages">
+      <ScrollableChat messages={messages} />
+  </div>
 )}
   <FormControl
   onKeyDown={(e) => {

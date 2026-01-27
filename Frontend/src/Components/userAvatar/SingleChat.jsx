@@ -15,8 +15,14 @@ import { getSenderFull } from "../../config/ChatLogics";
 import ProfileModal from "../miscellaneous/ProfileModal"
 import UpdateGroupChatModal from "../miscellaneous/UpdateGroupChatModal";
 import axios from "axios";
-import "./styles.css"; 
-const SingleChat = ({ fetchAgain, setFetchAgain }) => {
+import ScrollToBottom from "react-scroll-to-bottom";
+import ScrollableChat from "./ScrollableChat";
+import "./styles.css"
+import io from "socket.io-client"; 
+const ENDPOINT = "http://localhost:8000";
+let socket;
+let selectedChatCompare;
+const SingleChat = ({ fetchAgain, setFetchAgain }) => {  
  const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState("");
@@ -162,8 +168,8 @@ return (
     margin="auto"
   />
 ) : (
- < div className="messages">
-      <ScrollableChat messages={messages} />
+< div className="messages">
+   <ScrollableChat messages={messages}/>
   </div>
 )}
   <FormControl

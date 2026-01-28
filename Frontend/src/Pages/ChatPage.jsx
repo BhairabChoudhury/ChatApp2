@@ -17,12 +17,12 @@ function ChatPage() {
         w="100%"
         h="91.5vh"
         p="10px"
-        >
+      >
         {user && <MyChats fetchAgain={fetchAgain} />}
-          <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} /> 
+        {user && <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />}
       </Box>
     </div>
-  );
-}
+  ) ; 
+}  
 
 export default ChatPage;

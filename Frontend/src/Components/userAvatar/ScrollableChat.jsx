@@ -22,7 +22,7 @@ const ScrollableChat = ({messages})=>{
                 label={m.sender.name}
                 placement="bottom-start"
                 hasArrow
-              >
+               >
                 <Avatar
                   mt="7px"
                   mr={1}

@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["http://localhost:5175", "http://localhost:5176"],
+    origin: ["http://localhost:5177", "http://localhost:5176"],
     credentials: true,
   })
 );
@@ -35,7 +35,7 @@ const server = app.listen(PORT, () => {
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: ["http://localhost:5175", "http://localhost:5176"],
+    origin: ["http://localhost:5177", "http://localhost:5176"],
   },
 });
 
@@ -68,10 +68,20 @@ io.on("connection", (socket) => {
     if (!chat.users) return console.log("chat.users not defined");
 
     chat.users.forEach((user) => {
-      if (user._id == newMessageRecieved.sender._id) return;
+      if (user._id == newMessageRecieved.sender._id) return;//For every user in the chat except sender, emit the message to their personal room
 
       socket.in(user._id).emit("message received", newMessageRecieved);
     });
   });
 
 });
+/**
+ User 1 sends message
+        ↓
+Server receives "new message"
+        ↓
+Loop users
+        ↓
+Send to User 2’s room only
+
+ */

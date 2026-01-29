@@ -32,7 +32,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [typing, setTyping] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const toast = useToast();
-  const { selectedChat, setSelectedChat, user } = ChatState();
+  const { selectedChat, setSelectedChat, user,notification ,setNotification } = ChatState();
  
    const defaultOptions = {
     loop: true,
@@ -144,7 +144,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     },timerLength) 
   };
 
-
+ 
   useEffect(() => {
     fetchMessages();
 
@@ -158,14 +158,20 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     socket.on("message received", (newMessageRecieved) => {
       if (
         !selectedChatCompare || // if chat is not selected or doesn't match current chat
-        selectedChatCompare._id !== newMessageRecieved.chat._id
+        selectedChatCompare._id !== newMessageRecieved.chat._id// you are in the another chat but some new message come from different chat  
       ) {
         // notification logic can go here
+        if( !notification.includes(newMessageRecieved) ) {
+           setNotification([newMessageRecieved , ...notification]) ; 
+           setFetchAgain(!fetchAgain) ; 
+        }
       } else {
         setMessages([...messages, newMessageRecieved]);
       }
     });
   });
+
+  console.log(notification ,"--------------");
   return (
     <>
       {selectedChat ? (

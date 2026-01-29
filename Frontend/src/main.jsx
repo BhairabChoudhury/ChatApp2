@@ -7,10 +7,12 @@ import ChatProvider from "./Context/ChatProvider.jsx";
 import App from "./App.jsx";
 import "./index.css";
 
+import theme from "./theme.js";
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <ChatProvider>
           <App />
         </ChatProvider>

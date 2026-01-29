@@ -1,27 +1,30 @@
 // remember in message array store both message sender and receiver 
 
 export const getSender = (loggedUser, users) => {
+  if (!users || users.length < 2) return "Unknown Sender";
   return users[0]?._id === loggedUser?._id ? users[1].name : users[0].name;
 };
+
 export const getSenderFull = (loggedUser, users) => {
+  if (!users || users.length < 2) return "";
   return users[0]._id === loggedUser._id ? users[1] : users[0];
 };
 
-export const  isSameSenderMargin = (messages , m , i,userId)=>{
- if(i<messages.length-1 && messages[i+1].sender._id===m.sender._id && messages[i].sender._id!=userId){
-   return 33 ; 
- }
- else if(
+export const isSameSenderMargin = (messages, m, i, userId) => {
+  if (i < messages.length - 1 && messages[i + 1].sender._id === m.sender._id && messages[i].sender._id != userId) {
+    return 33;
+  }
+  else if (
 
-      (i < messages.length - 1 &&
+    (i < messages.length - 1 &&
       messages[i + 1].sender._id !== m.sender._id &&
       messages[i].sender._id !== userId) ||
     (i === messages.length - 1 && messages[i].sender._id !== userId)
 
- ) {
-  return 0 ; 
- }
- else return "auto" ; 
+  ) {
+    return 0;
+  }
+  else return "auto";
 }
 
 export const isLastMessage = (messages, i, userId) => { // last message of in chat bos sended by user 
@@ -41,5 +44,5 @@ export const isSameSender = (messages, m, i, userId) => {  // for checking  last
   );
 };
 export const isSameUser = (messages, m, i) => {
-  return i > 0 && messages[i-1].sender._id === m.sender._id;
+  return i > 0 && messages[i - 1].sender._id === m.sender._id;
 };

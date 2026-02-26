@@ -1,5 +1,5 @@
 # Build stage
-FROM node:18-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 
@@ -14,4 +14,4 @@ COPY . .
 EXPOSE 8000
 
 # Start the application
-CMD ["npm", "start"]
+CMD ["node", "server.js"]

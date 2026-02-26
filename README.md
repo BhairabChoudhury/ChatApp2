@@ -14,3 +14,12 @@ A scalable real-time chat application built using React, Node.js, Socket.IO, and
 - Modern notification system 
 
 --- 
+
+📸 Screenshots
+
+![alt text](<Screenshot 2026-02-26 024725.png>)
+
+
+
+
+

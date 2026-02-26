@@ -18,7 +18,7 @@ import GroupChatModal from "../miscellaneous/GroupChatModal";
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
 
-  const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
+  const { selectedChat, setSelectedChat, user, chats, setChats, notification, setNotification } = ChatState();
   const toast = useToast();
   const fetchChats = async () => {
 
@@ -104,26 +104,56 @@ const MyChats = ({ fetchAgain }) => {
             {chats.map((chat) => (
               <Box
                 key={chat._id}
-                onClick={() => setSelectedChat(chat)}
+                onClick={() => {
+                  setSelectedChat(chat);
+                  setNotification(notification.filter((n) => n.chat._id !== chat._id))
+                }}
                 cursor="pointer"
                 bg={selectedChat?._id === chat._id ? "brand.500" : "whiteAlpha.700"}
                 color={selectedChat?._id === chat._id ? "white" : "black"}
                 px={3}
                 py={3}
                 borderRadius="xl"
-                mb={2} // Margin bottom for spacing
+                mb={2}
                 boxShadow="sm"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
                 _hover={{
                   bg: selectedChat?._id === chat._id ? "brand.600" : "whiteAlpha.900",
                   transform: "scale(1.02)",
                   transition: "all 0.2s",
                 }}
               >
-                <Text fontWeight="bold">
-                  {!chat.isGroupChat
-                    ? getSender(loggedUser, chat.users)
-                    : chat.chatName}
-                </Text>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <Text fontWeight="bold">
+                    {!chat.isGroupChat
+                      ? getSender(loggedUser, chat.users)
+                      : chat.chatName}
+                  </Text>
+                  {chat.latestMessage && (
+                    <Text fontSize="xs">
+                      <b>{chat.latestMessage.sender.name} : </b>
+                      {chat.latestMessage.content.length > 50
+                        ? chat.latestMessage.content.substring(0, 51) + "..."
+                        : chat.latestMessage.content}
+                    </Text>
+                  )}
+                </div>
+                {notification.filter((n) => n.chat._id === chat._id).length > 0 && (
+                  <div
+                    style={{
+                      background: "green",
+                      color: "white",
+                      borderRadius: "50%",
+                      padding: "5px 10px",
+                      fontSize: "12px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {notification.filter((n) => n.chat._id === chat._id).length}
+                  </div>
+                )}
               </Box>
             ))}
           </Stack>

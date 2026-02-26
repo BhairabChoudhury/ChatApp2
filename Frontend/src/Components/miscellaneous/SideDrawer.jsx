@@ -162,8 +162,27 @@ function SideDrawer() {
         </Text>
         <div>
           <Menu>
-            <MenuButton as={Button} bg="white" rightIcon={<ChevronDownIcon />}>
+            <MenuButton as={Button} bg="white" rightIcon={<ChevronDownIcon />} position="relative">
               <BellIcon boxSize={5} color="black" />
+              {notification.length > 0 && (
+                <Box
+                  position="absolute"
+                  top="0"
+                  right="0"
+                  bg="red.500"
+                  borderRadius="full"
+                  width="18px"
+                  height="18px"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  color="white"
+                  fontSize="xs"
+                  transform="translate(25%, -25%)"
+                >
+                  {notification.length}
+                </Box>
+              )}
             </MenuButton>
             <MenuList pl={2}>
               {!notification.length && "No new Notifications"}
@@ -172,7 +191,6 @@ function SideDrawer() {
                   setSelectedChat(notif.chat);
                   setNotification(notification.filter((n) => n.chat._id !== notif.chat._id))
                   onClose();
-
                 }}>
                   {notif.chat.isGroupChat ? `New Message in ${notif.chat.chatName}` : `New Message from ${getSender(user, notif.chat.users)}`}
                 </MenuItem>

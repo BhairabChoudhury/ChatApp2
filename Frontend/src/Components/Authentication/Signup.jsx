@@ -96,7 +96,7 @@ function Signup () {
           setPicloading(true) ; 
           if(pics===undefined){ 
              toast({
-                title : "Please Select an Image!"  , 
+                title : "Please Select an Image or photo !"  , 
                 status :"error" , 
                  duration :5000 , 
                  isClosable :true , 
@@ -137,8 +137,7 @@ function Signup () {
         return;
      }
      
-   
-
+  
       }
 
     return (

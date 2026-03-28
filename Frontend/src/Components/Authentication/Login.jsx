@@ -45,7 +45,7 @@ function Login (){
       };
 
       const { data } = await axios.post(
-        "http://localhost:8000/api/user/login",
+        "https://chatapp2-cfdl.onrender.com/api/user/login",
         { name,email, password },
         config
       );

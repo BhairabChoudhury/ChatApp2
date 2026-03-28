@@ -29,7 +29,7 @@ const MyChats = ({ fetchAgain }) => {
         },
       };
 
-      const { data } = await axios.get("http://localhost:8000/api/chat", config);
+      const { data } = await axios.get("https://chatapp2-cfdl.onrender.com/api/chat", config);
       setChats(Array.isArray(data) ? data : []);
     } catch (error) {
       toast({

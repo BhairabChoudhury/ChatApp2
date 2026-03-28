@@ -60,7 +60,7 @@ const GroupChatModal = ({children})=>{
                      Authorization :`Bearer ${user.token}` 
                  }
               }
-              const {data} = await axios.post("http://localhost:8000/api/chat/group" , {
+              const {data} = await axios.post("https://chatapp2-cfdl.onrender.com/api/chat/group" , {
                 name :groupChatName , 
                 users:JSON.stringify(selectedUsers.map((u) => u._id)),
               } , config)
@@ -100,7 +100,7 @@ const GroupChatModal = ({children})=>{
                  } ,
              }
 
-              const {data} = await axios.get(`http://localhost:8000/api/user/find?search=${query}` , config) ;
+              const {data} = await axios.get(`https://chatapp2-cfdl.onrender.com/api/user/find?search=${query}` , config) ;
               console.log(data) ; 
               setLoading(false) ; 
               setSearchResult(data) ;

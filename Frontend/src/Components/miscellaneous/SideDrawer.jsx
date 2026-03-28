@@ -66,7 +66,7 @@ function SideDrawer() {
       };
 
       const { data } = await axios.post(
-        "http://localhost:8000/api/chat",
+        "https://chatapp2-cfdl.onrender.com/api/chat",
         { userId },
         config
       );
@@ -116,7 +116,7 @@ function SideDrawer() {
         }
       };
       const { data } = await axios.get(
-        `http://localhost:8000/api/user/find?search=${search}`,
+        `https://chatapp2-cfdl.onrender.com/api/user/find?search=${search}`,
         config
       );
       setLoading(false);

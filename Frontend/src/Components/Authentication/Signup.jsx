@@ -58,7 +58,7 @@ function Signup () {
         },
       };
       const { data } =  await axios.post( 
-        "http://localhost:8000/api/user",
+        "https://chatapp2-cfdl.onrender.com/api/user",
         {
           name,
           email,

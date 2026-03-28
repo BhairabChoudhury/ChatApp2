@@ -19,7 +19,7 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import ScrollableChat from "./ScrollableChat";
 import "./styles.css"
 import io from "socket.io-client";
-const ENDPOINT = "http://localhost:8000";
+const ENDPOINT = "https://chatapp2-cfdl.onrender.com";
 let socket;
 let selectedChatCompare;
 import Lottie from "react-lottie";
@@ -54,7 +54,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       setLoading(true);
 
       const { data } = await axios.get(
-        `http://localhost:8000/api/message/${selectedChat._id}`,
+        `https://chatapp2-cfdl.onrender.com/api/message/${selectedChat._id}`,
         config
       );
 
@@ -86,7 +86,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         };
 
         const { data } = await axios.post(
-          "http://localhost:8000/api/message",
+          "https://chatapp2-cfdl.onrender.com/api/message",
           {
             content: newMessage,
             chatId: selectedChat,

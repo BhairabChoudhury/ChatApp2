@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["https://chatapp2-cfdl.onrender.com"],
+    origin: ["https://chat-app2-five-sigma.vercel.app"],
     credentials: true,
   })
 );
@@ -35,7 +35,7 @@ const server = app.listen(PORT, () => {
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: ["https://chatapp2-cfdl.onrender.com"],
+    origin: ["https://chat-app2-five-sigma.vercel.app"],
   },
 });
 

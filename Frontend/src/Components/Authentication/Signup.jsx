@@ -92,9 +92,6 @@ function Signup () {
     }
       };
 
-
-
-
       const postDetails = (pics) =>{
           setPicloading(true) ; 
           if(pics===undefined){ 

@@ -40,10 +40,10 @@ const io = require("socket.io")(server, {
 });
 
 
-io.on("connection", (socket) => {
+io.on("connection", (socket) => { // socket act as  each user 
   console.log("connected to socket.io");
 
-  socket.on("setup", (userData) => {
+  socket.on("setup", (userData) => { // when user login, join their personal room 
     if (userData && userData._id) {
       socket.join(userData._id);
       console.log(userData._id);
@@ -74,6 +74,7 @@ io.on("connection", (socket) => {
     });
   });
 
+
 });
 /**
  User 1 sends message
@@ -85,3 +86,4 @@ Loop users
 Send to User 2’s room only
 
  */
+

@@ -11,12 +11,13 @@ const accessChat = asyncHandler(async (req, res) => {
     console.log("UserId param not sent with request");
     return res.sendStatus(400);
   }
-
+ 
+  
   var isChat = await Chat.find({
     isGroupChat: false,
     $and: [
       { users: { $elemMatch: { $eq: req.user._id } } },
-      { users: { $elemMatch: { $eq: userId } } },
+      { users: { $elemMatch: { $eq: userId } } } ,
     ],
   })
     .populate("users", "-password")
@@ -27,7 +28,7 @@ const accessChat = asyncHandler(async (req, res) => {
     select: "name pic email",
   });
 
-  if (isChat.length > 0) {
+  if (isChat.length > 0) {// chat already exist  
     res.send(isChat[0]);
   } else {
     var chatData = {

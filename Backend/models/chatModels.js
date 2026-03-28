@@ -12,6 +12,7 @@ const chatModel = mongoose.Schema ({
   groupAdmin :{ type :mongoose.Schema.Types.ObjectId  , ref:"User"} , 
 
 } , 
+
 {
      timestapms :true 
 } 
@@ -19,3 +20,4 @@ const chatModel = mongoose.Schema ({
 );
 const Chat = mongoose.model("Chat" , chatModel) ;
 module.exports = Chat ;
+

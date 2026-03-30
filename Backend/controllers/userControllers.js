@@ -56,7 +56,7 @@ const process = requiredBody.safeParse(req.body) ;
           pic,
      })
   }catch(err){
-   res.json({message : "User already exist"});
+   return res.json({message : "User already exist"});
   }
  
   res.json({message : "You have loged in Succesfully"}) ;
@@ -76,7 +76,7 @@ const  authUser = asyncHandler (async (req ,res ) =>{
   console.log("dfhjkadhaohooishd") ; 
     const process = requiredBody.safeParse(req.body) ;
     if(!process.success) {
-       res.json({
+       return res.json({
           message : "Incorrect Formate"  
        })
     } 

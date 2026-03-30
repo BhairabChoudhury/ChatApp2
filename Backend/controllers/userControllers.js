@@ -29,7 +29,7 @@ const allUsers = asyncHandler(async (req , res) =>{
 //@access          Public
 
 const registerUser = asyncHandler(async(req ,res ) =>{
-
+  console.log("he bro i am here ");
     const requiredBody = z.object({
   name: z.string().min(4).max(20),
   email: z.string().email(),   // ✅ FIX
@@ -96,6 +96,7 @@ const  authUser = asyncHandler (async (req ,res ) =>{
     if(!isPasswordCorrect) { 
        return res.status(403).json({message :"Invalid Credentials"}) ;
     }
+    console.log("he bro i am here 2");  
    res.json({
       _id: existingUser._id,
       name: existingUser.name,

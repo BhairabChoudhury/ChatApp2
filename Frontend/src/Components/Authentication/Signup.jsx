@@ -64,7 +64,7 @@ function Signup () {
           email,
           password,
           pic,
-        }, 
+        },   
           config 
       );
      //   console.log(data); 
